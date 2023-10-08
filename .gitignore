@@ -1,0 +1,28 @@
+# Ignore Python virtual environment files
+/venv/
+
+# Ignore database file
+/db.sqlite3
+
+# Ignore pycache and migration files
+**/__pycache__/
+**/__init__.py
+**/migrations/__pycache__/
+
+# Ignore IDE/Editor-specific files
+
+__pycache__/
+*.db
+*.sqlite3
+*.vscode/
+.vscode/
+
+# Ignore local development settings
+local_settings.py
+
+# Ignore project-specific settings
+/ivatec/ivatec_api/settings/local.py
+/ivatec/ivatec_api/settings/secret.py
+
+# Ignore user-uploaded media files (assuming you use a separate server for this)
+/ivatec/upload_files/media/
