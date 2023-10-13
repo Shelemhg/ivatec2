@@ -16,6 +16,7 @@ MAX_NAME_LENGTH = 50
 
 
 def is_pdf_file(file):
+    
     try:
         mime = magic.Magic()
         file_type = mime.from_buffer(file.read(1024))  # Read only a portion of the file to determine its type
@@ -26,6 +27,7 @@ def is_pdf_file(file):
 
 
 def is_xml_file(uploaded_file):
+    
     try:
         xml_parser = etree.XMLParser(recover=True)
         etree.fromstring(uploaded_file.read(), parser=xml_parser)
@@ -44,6 +46,7 @@ def is_xml_file(uploaded_file):
 ####################################
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
+
 
 
 
@@ -67,10 +70,15 @@ def validate_files(request):
         
         
 
-        # Validate the number of uploaded files
+        # Validate the number of files uploaded doesn't exceed the maximum allowed
         if len(uploaded_files) > MAX_UPLOAD_COUNT:
             
             return JsonResponse({'message': 'Too many files uploaded. Exceeds limit.'}, status=400)
+        
+        # Validate the number of uploaded files is more than 2
+        if len(uploaded_files) < 1:
+            
+            return JsonResponse({'message': 'Please upload a minimum of 2 files. '}, status=400)
 
         
         schema = "./sat.gob.mx_sitio_internet_cfd_4_cfdv40.xsd"
